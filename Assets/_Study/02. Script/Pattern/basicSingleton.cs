@@ -12,7 +12,7 @@ public class basicSingleton : MonoBehaviour
         {
             if (instance == null)
             {
-                var obj = FindObjectOfType<basicSingleton>();
+                var obj = FindFirstObjectByType<basicSingleton>();
                 if (obj != null)
                 {
                     instance = obj;
