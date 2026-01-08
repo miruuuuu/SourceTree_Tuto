@@ -12,8 +12,9 @@ public class StudyScore : MonoBehaviour
     
     //static <~ 다른 곳에서 가져가서 쓸 때 하나하나 할당하지 않아도 됨.
     //event <~ 아무나 막 실행하는 걸 막을 수 있음. 실행이 아니라 기능 추가를 시킴.
-    public static event Action onScoreUp;
-    public static event Action onScoreDown;
+    
+    //public static event Action onScoreUp;
+    //public static event Action onScoreDown;
 
     public static Action<int, bool> onScore;
 
@@ -21,8 +22,8 @@ public class StudyScore : MonoBehaviour
 
     void Start()
     {
-        onScoreUp += ScoreUp;
-        onScoreDown += ScoreDown;
+        //onScoreUp += ScoreUp;
+        //onScoreDown += ScoreDown;
 
         onScore += ScoreUpDown;
     }
@@ -47,6 +48,6 @@ public class StudyScore : MonoBehaviour
 
     public static void TriggerScore()
     {
-        onScoreUp?.Invoke();
+        //onScoreUp?.Invoke();
     }
 }
