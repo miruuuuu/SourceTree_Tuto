@@ -1,5 +1,6 @@
 using System;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 public class Tile : MonoBehaviour
 {
@@ -16,8 +17,13 @@ public class Tile : MonoBehaviour
             return;
 
         GameObject cropObj = Instantiate (cropPrefab);
+        //GameObject cropObj = PoolManager.Instance.pool.Get(); //풀에서 농작물 오브젝트를 가져옴.
         cropObj.transform.SetParent(this.transform); //타일의 자식으로 설정
         cropObj.transform.localPosition = Vector3.zero; //타일의 중심에 위치.
+        
+        float randomY = Random.Range(0f, 360f); //0~360도 사이의 랜덤한 y축 회전값
+        Vector3 randomRot = new Vector3(0f, randomY, 0f);
+        cropObj.transform.localRotation = Quaternion.Euler(randomRot); //랜덤한 y축 회전 적용
         
         isCreate = true; //농작물이 심어졌음을 표시.
     }

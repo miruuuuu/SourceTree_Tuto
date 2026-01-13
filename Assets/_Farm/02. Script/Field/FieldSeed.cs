@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 public class FieldSeed : IField
 {
@@ -20,6 +21,10 @@ public class FieldSeed : IField
     {
         if (Input.GetMouseButtonDown(0) && selectCrop != null) //마우스 왼쪽 클릭
         {
+
+            if (EventSystem.current.IsPointerOverGameObject()) //오입력 방지. UI 위에 마우스가 있을 땐 작동하지 않음.
+                return;
+
             Ray ray = mainCamera.ScreenPointToRay(Input.mousePosition);
             RaycastHit hit;
 
