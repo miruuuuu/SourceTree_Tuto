@@ -24,6 +24,11 @@ public class Crop : MonoBehaviour
         StartCoroutine(GrowthRoutine()); //성장 시작
     }
 
+    void OnDisable()
+    {
+        WeatherSystem.weatherChanged -= SetGrowth; //구독 해제
+    }
+
     IEnumerator GrowthRoutine()
     {
         yield return new WaitForSeconds(growthTime); //성장 대기 시간
@@ -40,11 +45,31 @@ public class Crop : MonoBehaviour
     {
         for (int i = 0; i < transform.childCount; i++) //모든 자식 오브젝트에 반복 접근해 전부 비활성화
             transform.GetChild(i).gameObject.SetActive(i == (int)newState);
-            //반복 접근 중, 현재 호출에 맞지 않는 상태의 작물 접근 시, false를 반환해 비활성화
-            //현재 호출에 맞는 상태의 작물 접근 시, true를 반환하며 활성화. 한줄로 줄이는데 의의가 있음.
-            //transform.GetChild(i).gameObject.SetActive(false);
+        //반복 접근 중, 현재 호출에 맞지 않는 상태의 작물 접근 시, false를 반환해 비활성화
+        //현재 호출에 맞는 상태의 작물 접근 시, true를 반환하며 활성화. 한줄로 줄이는데 의의가 있음.
+        //transform.GetChild(i).gameObject.SetActive(false);
 
         //transform.GetChild((int)newState).gameObject.SetActive(true); //해당 상태에 맞는 자식 오브젝트만 활성화
+    }
+
+    //날씨의 영향을 받는 작물의 성장 속도
+    private void SetGrowth(WeahterType weahterType)
+    {
+        for (int i = 0; i < transform.childCount; i++)
+        {
+            switch (weahterType)
+            {
+                case WeahterType.Sunny:
+                    growthTime = 1f; //맑은 날 : 기본 성장 속도
+                    break;
+                case WeahterType.Rainy:
+                    growthTime *= 0.7f; //비 오는 날 : 성장 속도 30% 증가.
+                    break;
+                case WeahterType.Snowy:
+                    growthTime *= 0.5f; //눈 오는 날 : 성장 속도 50% 증가.
+                    break;
+            }
+        }
     }
 
 
