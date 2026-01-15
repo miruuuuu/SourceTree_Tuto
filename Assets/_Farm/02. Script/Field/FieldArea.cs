@@ -42,7 +42,7 @@ public class FieldArea : MonoBehaviour, ITriggerEvent
         tileArray = new GameObject[fieldSize.x, fieldSize.y];
 
         seed = new FieldSeed();
-        harvest = new FieldHarvest();
+        harvest = new FieldHarvest(Camera.main);
 
         seedButton.onClick.AddListener(() => //기능이 간단하므로 람다식으로 작성됨.
         {

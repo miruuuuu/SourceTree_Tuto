@@ -11,6 +11,8 @@ public class PlayerMovement : MonoBehaviour
     private Vector3 moveVector;
     private Vector3 verticalVelocity;
 
+    [SerializeField] private GameObject inventoryUI; // UIManager를 싱글턴으로 만들면 되겠지만 뭐...
+
     private float currSpeed; //쉬프트 입력에 따라 walkSpeed 또는 runSpeed 할당
     private float walkSpeed = 3f;
     private float runSpeed = 6f;
@@ -36,7 +38,7 @@ public class PlayerMovement : MonoBehaviour
         var interactable = other.GetComponent<ITriggerEvent>();
         if (interactable != null)
             interactable.InteractionEnter();
-    
+
     }
 
     private void OnTriggerExit(Collider other)
@@ -98,6 +100,16 @@ public class PlayerMovement : MonoBehaviour
         Vector2 inputDir = value.Get<Vector2>();
         moveInput = new Vector3(inputDir.x, 0, inputDir.y);
         //moveVector = Vector3.zero; //점프는 없지만 가상 중력이 필요함.
+    }
+
+
+    //스폰 매니저 쓰기 시작하면 어차피 싱글턴으로 바꿔야되긴 함.
+    private void OnInventory(InputValue value)
+    {
+        if (value.isPressed)
+        {
+            inventoryUI.SetActive(!inventoryUI.activeSelf);// <~ 토글
+        }
 
     }
 }

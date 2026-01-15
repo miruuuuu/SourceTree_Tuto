@@ -12,5 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8d908e6dce8e4d24bb2edb45031d3d70, type: 3}
   m_Name: Carrot
   m_EditorClassIdentifier: 
+  fruit: {fileID: 1533167060578401926, guid: 79f0cb3c2742e0b45abc86ee4e1be0a4, type: 3}
   growthTime: 3.5
   maxFruitCount: 1

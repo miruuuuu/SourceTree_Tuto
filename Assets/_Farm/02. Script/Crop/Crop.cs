@@ -26,7 +26,7 @@ public class Crop : MonoBehaviour
 
     void OnDisable()
     {
-        WeatherSystem.weatherChanged -= SetGrowth; //구독 해제
+        WeatherSystem.weatherChanged -= SetGrowth; //구독 해제.
     }
 
     IEnumerator GrowthRoutine()
@@ -45,6 +45,9 @@ public class Crop : MonoBehaviour
     {
         for (int i = 0; i < transform.childCount; i++) //모든 자식 오브젝트에 반복 접근해 전부 비활성화
             transform.GetChild(i).gameObject.SetActive(i == (int)newState);
+            
+        cropState = newState; //변경된 상태를 할당.
+        
         //반복 접근 중, 현재 호출에 맞지 않는 상태의 작물 접근 시, false를 반환해 비활성화
         //현재 호출에 맞는 상태의 작물 접근 시, true를 반환하며 활성화. 한줄로 줄이는데 의의가 있음.
         //transform.GetChild(i).gameObject.SetActive(false);
@@ -70,6 +73,12 @@ public class Crop : MonoBehaviour
                     break;
             }
         }
+    }
+
+    public void SetCropData(out GameObject fruit, out int maxCount)
+    {
+        fruit = cropData.fruit;
+        maxCount = cropData.maxFruitCount;
     }
 
 

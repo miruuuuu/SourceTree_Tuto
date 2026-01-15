@@ -12,5 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8d908e6dce8e4d24bb2edb45031d3d70, type: 3}
   m_Name: Eggplant
   m_EditorClassIdentifier: 
+  fruit: {fileID: 2230148392823459866, guid: 1fc5532ecb4aca149b74b7a3372d2180, type: 3}
   growthTime: 5
   maxFruitCount: 4
