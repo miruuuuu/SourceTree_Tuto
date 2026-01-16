@@ -27,7 +27,7 @@ public class Fruit : MonoBehaviour, ITriggerEvent, IItem
 
     public void Get()
     {
-        Debug.Log($"{gameObject.name} 획득");
+        Debug.Log($"{gameObject.name.Replace("(Clone)", "")} 획득");
         PoolManager.Instance.ReleaseObject(gameObject.name.Replace("(Clone)", ""), gameObject); //사라짐.
         //Destroy(gameObject);
 

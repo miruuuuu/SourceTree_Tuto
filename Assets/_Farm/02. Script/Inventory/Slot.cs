@@ -83,7 +83,9 @@ public class Slot : MonoBehaviour, IBeginDragHandler, IDragHandler, IDropHandler
 
     public void OnEndDrag(PointerEventData eventData) //아무것도 없는 곳에서 놓은 것.
     {
-        // 없어도 무방하나 안전하게 하기 위함.
+        if (!EventSystem.current.IsPointerOverGameObject()) //UI 위에 있지 않다면
+            DropItemToWorld();
+
         dragItem.sprite = null;
         dragItem.gameObject.SetActive(false);
         dragSlot = null;
@@ -91,10 +93,24 @@ public class Slot : MonoBehaviour, IBeginDragHandler, IDragHandler, IDropHandler
         dragItem.raycastTarget = true;
     }
 
+    private void DropItemToWorld()
+    {
+        if (item == null)
+            return;
+
+        Vector3 mousePos = Input.mousePosition;
+        mousePos.z = 10f; //카메라로부터의 거리
+        Vector3 spawnPos = Camera.main.ScreenToWorldPoint(mousePos);
+        GameObject dropObj = PoolManager.Instance.GetObject(item.ItemName);
+        SetItem(null); //슬롯 비우기
+
+        //Debug.Log($"{item.ItemName}을(를) 버렸습니다.");
+    }
+
     public void SetItem(IItem newItem)
     {
         this.item = newItem;
-        if(newItem == null)
+        if (newItem == null)
         {
             IsEmpty = true;
             slotImage.sprite = null;

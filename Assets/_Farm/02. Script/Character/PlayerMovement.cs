@@ -11,8 +11,6 @@ public class PlayerMovement : MonoBehaviour
     private Vector3 moveVector;
     private Vector3 verticalVelocity;
 
-    [SerializeField] private GameObject inventoryUI; // UIManager를 싱글턴으로 만들면 되겠지만 뭐...
-
     private float currSpeed; //쉬프트 입력에 따라 walkSpeed 또는 runSpeed 할당
     private float walkSpeed = 3f;
     private float runSpeed = 6f;
@@ -107,9 +105,12 @@ public class PlayerMovement : MonoBehaviour
     private void OnInventory(InputValue value)
     {
         if (value.isPressed)
-        {
-            inventoryUI.SetActive(!inventoryUI.activeSelf);// <~ 토글
-        }
+            UIManager.Instance.InventoryOnOff();
+    }
 
+    private void OnEscape(InputValue value)
+    {
+        if (value.isPressed)
+            UIManager.Instance.AllPopUpClose();
     }
 }
