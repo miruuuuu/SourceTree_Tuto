@@ -9,6 +9,7 @@ public class CameraManager : MonoBehaviour
     //그냥 부모 오브젝트일 뿐이라 trasnform이면 된다. chnemachineClearShot일 필요 없음.
 
     private static event Action<string, string> onChangeCamera; //외부에서 접근 불가
+    public static Action<Transform> onSetProperty; //외부에서 접근 가능
 
     private Dictionary<string, CinemachineCamera> cameraDics = new Dictionary<string, CinemachineCamera>();
     //이름으로 호출하면 카메라가 잡히도록
@@ -18,7 +19,7 @@ public class CameraManager : MonoBehaviour
         if (clearShot == null)
             return;
 
-        for(int i=0; i < clearShot.childCount; i++)
+        for (int i = 0; i < clearShot.childCount; i++)
         {
             Transform child = clearShot.GetChild(i);
             CinemachineCamera cam = child.GetComponent<CinemachineCamera>();
@@ -33,11 +34,13 @@ public class CameraManager : MonoBehaviour
     void OnEnable()
     {
         onChangeCamera += SetCamera;
+        onSetProperty += SetProperty;
     }
 
     void OnDisable()
     {
         onChangeCamera -= SetCamera;
+        onSetProperty -= SetProperty;
     }
 
     private void SetCamera(string from, string to)
@@ -50,5 +53,11 @@ public class CameraManager : MonoBehaviour
     {
         onChangeCamera?.Invoke(from, to);
     }
-    
+
+    private void SetProperty(Transform target)
+    {
+        cameraDics["Player"].Follow = target;
+        cameraDics["Player"].LookAt = target;
+        cameraDics["Animal"].LookAt = target;
+    }
 }

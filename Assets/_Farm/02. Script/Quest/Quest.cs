@@ -20,10 +20,12 @@ public class Quest : IObserver
     {
         if (QuestName == data.questName && !IsCompleted)
         {
-            if (CurrentCount < data.requestCount)
+            CurrentCount++;
+            if (CurrentCount >= data.requestCount)
             {
                 IsCompleted = true;
                 Debug.Log($"{data.questName} 퀘스트 완료!");
+                
                 QuestManager.Instance.RemoveObserver(this); //완료 시 제거
 
 

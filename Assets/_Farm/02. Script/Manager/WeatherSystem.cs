@@ -18,6 +18,7 @@ public class WeatherSystem : MonoBehaviour
     [SerializeField] private GameObject[] weatherParticles;
 
     public static event Action<WeahterType> weatherChanged;
+    //날씨가 바뀔 때마다 알림을 보내는 이벤트. 날씨에 의해 영향을 받게되는 것들이 구독한다.
 
     IEnumerator Start()
     {

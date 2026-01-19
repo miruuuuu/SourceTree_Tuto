@@ -8,9 +8,18 @@ EditorBuildSettings:
   - enabled: 0
     path: Assets/Scenes/SampleScene.unity
     guid: 99c9720ab356a0642a771bea13969a05
-  - enabled: 1
+  - enabled: 0
     path: Assets/_Study/01. Scenes/StudyCode.unity
     guid: 2cc1acbc5cd9b5e47998a14b80e3d077
+  - enabled: 1
+    path: Assets/_Farm/01. Scene/00. Intro.unity
+    guid: 3fc1d118f1a5cda429ebe0d7b103b14e
+  - enabled: 1
+    path: Assets/_Farm/01. Scene/01. Charactor Select.unity
+    guid: 72a7bb434cf771e4d8081ccd41e9c8fe
+  - enabled: 1
+    path: Assets/_Farm/01. Scene/02. Main Scene.unity
+    guid: 9f3db11f1b057984594217cb0e6e5799
   m_configObjects:
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 052faaac586de48259a63d0c4782560b, type: 3}
   m_UseUCBPForAssetBundles: 0

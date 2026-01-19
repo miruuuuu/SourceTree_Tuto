@@ -93,7 +93,8 @@ namespace Farm
 
             FadeEvent.fadeAction?.Invoke(3f, Color.black, false); //페이드 아웃
             yield return new WaitForSeconds(3f); //3초 대기
-            //UnityEngine.SceneManagement.SceneManager.LoadScene("MainScene");
+            
+            UnityEngine.SceneManagement.SceneManager.LoadScene(2);
         }
     }
 }

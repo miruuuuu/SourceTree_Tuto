@@ -89,7 +89,8 @@ public class PlayerMovement : MonoBehaviour
         // WASD 입력시 속도 3 = Walk
         // Shift 입력시 속도 6 = Run
 
-        anim.SetFloat("Speed", currSpeed);
+        //anim.SetFloat("Speed", currSpeed);
+        anim.SetFloat("Speed", currSpeed, 0.1f, Time.deltaTime); //애니메이션 진입/이탈이 부드럽게 이루어짐.
 
     }
 
